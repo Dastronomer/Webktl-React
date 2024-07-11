@@ -40,7 +40,7 @@ export const WebSocketProvider = ({url, children}) => {
             let parsedMessage;
             try{
                 const oneMessage = message.data;
-                const processedData = oneMessage.replace(/\binf\b/g, '"Infinity"');
+                const processedData = oneMessage.replace(/\binf\b/g, '"∞"');
 
                 //console.log(`processedData: ${processedData}`)
                 parsedMessage = JSON.parse(processedData);
