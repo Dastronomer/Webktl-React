@@ -6,6 +6,7 @@ import KeywordBoolCheckbox from "../components/KeywordBoolCheckbox";
 import DataContainer2Cols from "../components/DataContainer2Cols";
 import KeywordValueTable from "../components/KeywordValueTable";
 import KeywordBoolSwitch from "../components/KeywordBoolSwitch";
+import KeywordCheckbox from "../components/KeywordCheckbox";
 
 function ExamplePage(props) {
 
@@ -37,6 +38,7 @@ function ExamplePage(props) {
                     <KeywordButton keyword={'pie.INTEGER'} buttonValue={'3'} variant={'secondary'}/>
                     <KeywordButton keyword={'pie.ODD'} buttonValue={'0'} variant={'danger'}/>
                     <KeywordButton keyword={'pie.ODD'} buttonValue={'3'}/>
+                    <KeywordCheckbox keyword={'pie.MIXED'} options={['fooC1', 'pooC1', 'vooC1']} />
                 </>
             }
             contentRight={
