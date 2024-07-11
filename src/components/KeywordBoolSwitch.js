@@ -21,7 +21,7 @@ function KeywordBoolSwitch({keyword, label, makeConfirm}) {
     let key = keyArray[1];
 
     const handleSwitched = () => {
-        const userConfirmed = !makeConfirm || window.confirm(`Confirm ${key} switch change: `);
+        const userConfirmed = !makeConfirm || window.confirm(`Confirm {${key}} switch change: `);
         if(userConfirmed){
             const newSwich = !isSwitchOn;
             setIsSwitchOn(newSwich);
@@ -33,16 +33,18 @@ function KeywordBoolSwitch({keyword, label, makeConfirm}) {
 
     return (
         <Form >
-            <FormLabel style={{display:"inline"}}>
+
+            <FormLabel style={{display:"inline"}} >
                 {label ? label : `${key}: `}
-            </FormLabel>
-            <Form.Check
-                type="switch"
-                id={`${keyword}-switch`}
-                onChange={handleSwitched}
-                checked={isSwitchOn}
-                style={{display:"inline"}}
+                <Form.Check
+                    type="switch"
+                    id={`${keyword}-switch`}
+                    onChange={handleSwitched}
+                    checked={isSwitchOn}
+                    style={{display:"inline"}}
                 />
+            </FormLabel>
+
 
         </Form>
     );

@@ -23,7 +23,7 @@ function KeywordBoolCheckbox({keyword, label, makeConfirm}) {
     const handleChecked = () => {
 
         // setAcutalChecked(!actualChecked);
-        const userConfirmed = !makeConfirm || window.confirm(`Confirm ${key} checkbox click`);
+        const userConfirmed = !makeConfirm || window.confirm(`Confirm {${key}} checkbox click`);
         if(userConfirmed){
             const newChecked = !isChecked
             setIsChecked(newChecked);
@@ -38,6 +38,7 @@ function KeywordBoolCheckbox({keyword, label, makeConfirm}) {
             type="checkbox"
             onChange={handleChecked}
             checked={isChecked}
+            id={`${keyword}-boolCheckbox`}
         />
     );
 

@@ -34,7 +34,7 @@ function ExamplePage(props) {
             contentLeft={
                 <>
                     <KeywordButton keyword={'pie.MIXED'} buttonValue={'update-using-button'} variant={'secondary'} makeConfirm={true}/>
-                    <KeywordButton keyword={'pie.INTEGER'} buttonValue={'47'} variant={'secondary'}/>
+                    <KeywordButton keyword={'pie.INTEGER'} buttonValue={'3'} variant={'secondary'}/>
                     <KeywordButton keyword={'pie.ODD'} buttonValue={'0'} variant={'danger'}/>
                     <KeywordButton keyword={'pie.ODD'} buttonValue={'3'}/>
                 </>

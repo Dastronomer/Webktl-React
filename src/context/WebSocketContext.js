@@ -44,18 +44,20 @@ export const WebSocketProvider = ({url, children}) => {
 
                 //console.log(`processedData: ${processedData}`)
                 parsedMessage = JSON.parse(processedData);
-                function convertInfinity(obj){
+                function convertParsedData(obj){
                     for(const key in obj){
                         if(obj[key] === "Infinity"){
                             obj[key] = Infinity;
-                            console.log(obj[key]);
-                        }else if(typeof obj[key] === 'object' && obj[key] !== null){
-                            convertInfinity(obj[key]);
+                        }else if(obj[key] === 0){
+                            obj[key] = '0';
+                        }else if(obj[key] === ""){
+                            obj[key] = " ";
+                        } else if(typeof obj[key] === 'object' && obj[key] !== null){
+                            convertParsedData(obj[key]);
                         }
                     }
                 }
-
-                convertInfinity(parsedMessage);
+                convertParsedData(parsedMessage);
 
                 if(parsedMessage.type && parsedMessage.request_id) {
                     if(parsedMessage.errcode !== "SUCCESS"){
@@ -72,7 +74,6 @@ export const WebSocketProvider = ({url, children}) => {
                     // console.log(requests.length);
 
                 }
-                //console.log(requests.length)
                 else if(parsedMessage.key && parsedMessage.value){
                     setMessages((prevMessages) => {
                         // Check if parsedMessage is already in prevMessages
@@ -90,16 +91,10 @@ export const WebSocketProvider = ({url, children}) => {
                     });
                 }
 
+
             } catch(error) {
                 console.error(`Error parsing JSON: `, error);
             }
-
-            // const parsedMessage = JSON.parse(message.data);
-
-
-            // console.log(parsedMessage)
-            //console.log(`Received message: ${parsedMessage.key} : ${parsedMessage.value}`);
-
 
         };
         setWs(wsClient);

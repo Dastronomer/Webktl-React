@@ -9,6 +9,7 @@ function DisplayKeywordValue({keyword}) {
         // console.log(`length : ${Object.keys(messages).length}`)
         messages.forEach(msg => {
             if(msg.key === keyword){
+                console.log(`key33: ${msg.key} : value ${msg.value}`)
                 setValue(msg.value);
             }
         })
@@ -21,7 +22,7 @@ function DisplayKeywordValue({keyword}) {
             {value !== null ? (
                     <p>{`${keyword} : ${value}`}</p>
                 ) : (
-                    <p> {`notfound`}</p>
+                    <p> {`${keyword} : notfound`}</p>
                 )
             }
         </div>

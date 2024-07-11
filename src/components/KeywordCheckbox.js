@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useWebSocket} from "../context/WebSocketContext";
 
-function KeywordCheckbox({keyword, label, options}){
+function KeywordCheckbox({keyword, label, options, makeConfirm}){
 
     const [checkedList, setCheckedList] = useState([]);
     const {sendMessage} = useWebSocket();
@@ -12,12 +12,19 @@ function KeywordCheckbox({keyword, label, options}){
     // checks if value is already in 'checkedList'
     const handleChecked = (e) => {
         const value = e.target.value;
-        const updatedList = checkedList.includes(value)
-            ? checkedList.filter((item) => item !== value)
-            : [...checkedList, value];
+        console.log(value)
+        const userConfirmed = !makeConfirm || window.confirm(`Confirm {${key}} checked change: `);
+        if(userConfirmed) {
+            const updatedList = checkedList.includes(value)
+                ? checkedList.filter((item) => item !== value)
+                : [...checkedList, value];
             setCheckedList(updatedList);
-        const message = { "type": "modify", "request_id": null, "key":keyword, "value":checkedList};
-        sendMessage(message);
+
+            const message = {"type": "modify", "request_id": null, "key": keyword, "value": updatedList};
+            sendMessage(message);
+        }
+
+
     };
     const keyArray = keyword.split(".");
     let key = keyArray[1];
