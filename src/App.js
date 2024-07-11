@@ -4,6 +4,7 @@ import SideBar from './components/SideBar';
 import Home from './pages/Home';
 import {WebSocketProvider} from "./context/WebSocketContext";
 import ExamplePage from "./pages/ExamplePage";
+import NotFound from "./pages/NotFound";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
                       <Routes>
                           <Route path="/" element={<Home />} />
                           <Route path="/examplepage" element={<ExamplePage/>} />
+                          <Route path='*' element={<NotFound/>} />
                       </Routes>
                   </div>
               </BrowserRouter>
