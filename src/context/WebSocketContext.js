@@ -93,7 +93,8 @@ export const WebSocketProvider = ({url, children}) => {
 
 
             } catch(error) {
-                console.error(`Error parsing JSON: `, error);
+                alert(`Error parsing JSON: ${error}`);
+                // console.error(`Error parsing JSON: `, error);
             }
 
         };
