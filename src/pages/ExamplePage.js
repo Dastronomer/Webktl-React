@@ -88,22 +88,6 @@ function ExamplePage(props) {
 
         >
         </DataContainer2Cols>
-    const carouselContents = [
-        <DataContainer2Cols
-            contentLeft={
-            <>
-                <KeywordDropdownButton keyword={'pie.STRING'} options={['option1', 'option2', 'option3']} makeConfirm={true} />
-                <KeywordBoolCheckbox keyword={'pie.BOOLEAN'} makeConfirm={true}/>
-                <KeywordBoolSwitch keyword={'pie.BOOLEAN'} makeConfirm={true}/>
-            </>}
-            contentRight={
-            <>
-                <KeywordDropdownButton keyword={'pie.STRING'} options={['option1', 'option2', 'option3']} makeConfirm={true} />
-                <KeywordBoolCheckbox keyword={'pie.BOOLEAN'} makeConfirm={true}/>
-                <KeywordBoolSwitch keyword={'pie.BOOLEAN'} makeConfirm={true}/>
-            </>}
-        />
-    ]
 
     return (
         <div style={{fontSize:10}}>
