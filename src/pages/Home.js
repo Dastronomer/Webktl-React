@@ -14,9 +14,7 @@ function Home() {
 
     return (
         <div>
-            <div>
-                <DataContainer2Cols header={'WELCOME TO YOUR OWN REACT-WEBKTL PAGE'} contentTop={welcomeTop}/>
-            </div>
+            <DataContainer2Cols header={'WELCOME TO YOUR OWN REACT-WEBKTL PAGE'} contentTop={welcomeTop}/>
         </div>
     );
 }
