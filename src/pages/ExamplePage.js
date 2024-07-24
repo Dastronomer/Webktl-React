@@ -92,6 +92,16 @@ function ExamplePage(props) {
         >
         </DataContainer2Cols>
     const carouselContents = [
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+            <img className="teleSpin" src="https://cdn-icons-png.flaticon.com/512/196/196689.png" alt="telescope icon"
+                 style={{width: 100, height: 100, margin: 20}}/>
+
+            <p align='left' style={{fontSize:13}}><span style={{display:"block", fontSize:16}}> More Info on Carousels </span>
+                Carousels provide a fun rotating featuring for displaying other components.
+            To adjust the amount of slides in a carousel, all contents are pass via an
+            array to the DataContainerCarousel components. Each block wihtin the array
+                represents a new slide. </p>
+        </div>,
         <DataContainer2Cols
             contentLeft={
                 <>
