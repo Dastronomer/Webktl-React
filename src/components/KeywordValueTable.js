@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Table} from "react-bootstrap";
 import {useWebSocket1} from "../context/WebSocketProviders";
 
-function KeywordValueTable({ keywordList }) {
+function KeywordValueTable({ keywordList, keywordLabelList, title }) {
     const { messages, metadata } = useWebSocket1();
     const [values, setValues] = useState({});
 
@@ -29,16 +29,23 @@ function KeywordValueTable({ keywordList }) {
     return (
         <div className='key-value-table'>
             <Table bordered hover >
+                {title ? (
+                    <thead>
+                    <tr>
+                        <th colSpan={2} style={{ backgroundColor: 'whitesmoke' }}>{title}</th>
+                    </tr>
+                    </thead>
+                ) : null}
                 <tbody>
-                {keywordList.map(keyword => (
-                    <tr key={keyword} >
-                        <td style={{width:'35%'}}>{keyword}</td>
+                {keywordList.map(((keyword, index) => (
+                    <tr key={keyword}>
+                        <td style={{width:'35%'}}>{keywordLabelList ? <b>{keywordLabelList[index]}</b> : keyword}</td>
                         {values[keyword] !== null ?
                             <td> {values[keyword]} </td>
                             :
                             <td style={{backgroundColor:'pink'}}>ERROR: KEYWORD NOT VALID or VALUE is null</td>}
                     </tr>
-                ))}
+                )))}
                 </tbody>
             </Table>
         </div>

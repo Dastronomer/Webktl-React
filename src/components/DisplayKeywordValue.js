@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {useWebSocket1} from "../context/WebSocketProviders";
+import {Spinner} from "react-bootstrap";
 
-function DisplayKeywordValue({keyword}) {
+function DisplayKeywordValue({keyword, label}) {
     const {messages} = useWebSocket1();
     const [value, setValue] = useState(null);
 
@@ -19,10 +20,11 @@ function DisplayKeywordValue({keyword}) {
     return (
         <div style={{fontSize:10, margin:5}}>
             {value !== null ? (
-                    <p>{`${keyword} : ${value}`}</p>
-                ) : (
-                    <p> {`notfound`}</p>
-                )
+                <p>{label ? <span><b>{label}</b>: {value} </span> : `${keyword}: ${value}`} </p>
+            ) : (
+                <p>{label ? <span><b>{label}</b>: <Spinner animation="border" size='sm'/> </span> :
+                    <Spinner animation="border" size='sm'/>} </p>
+            )
             }
         </div>
     );

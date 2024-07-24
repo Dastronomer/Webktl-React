@@ -31,6 +31,7 @@ function ExamplePage(props) {
     const evenSmallerKeywordList = ["pie.ANGLE", "pie.BOOLEAN", "pie.BURST", "pie.CACHED",
         "pie.DBL1000"]
 
+    const evenSmallerKeywordLabelList = ["ANGLE", "BOOLEAN", "BURST", "CACHED", "DBL1000"]
 
     const features1 =
         <DataContainer2Cols
@@ -107,7 +108,7 @@ function ExamplePage(props) {
 
                 </>}
         />,
-        <KeywordValueTable keywordList={evenSmallerKeywordList}/>
+        <KeywordValueTable keywordList={evenSmallerKeywordList} keywordLabelList={evenSmallerKeywordLabelList}/>
     ]
 
     return (
