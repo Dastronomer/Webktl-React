@@ -22,7 +22,8 @@ function SideBar({instrumentName }) {
                         {instrumentName}
                     </a>
                 </CDBSidebarHeader>
-
+                {/*  Check out link for icon options  */}
+                {/*  https://fontawesome.com/search?s=solid&f=classic&o=r  */}
                 <CDBSidebarContent className="sidebar-content">
                     <CDBSidebarMenu>
                         <NavLink to="/" className={({ isActive }) => (isActive ? 'activeClicked' : '')}>

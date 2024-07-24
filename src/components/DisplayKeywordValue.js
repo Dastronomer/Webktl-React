@@ -20,10 +20,10 @@ function DisplayKeywordValue({keyword, label}) {
     return (
         <div style={{fontSize:10, margin:5}}>
             {value !== null ? (
-                <p>{label ? <span><b>{label}</b>: {value} </span> : `${keyword}: ${value}`} </p>
+                <div>{label ? <span><b>{label}</b>: {value} </span> : `${keyword}: ${value}`} </div>
             ) : (
-                <p>{label ? <span><b>{label}</b>: <Spinner animation="border" size='sm'/> </span> :
-                    <Spinner animation="border" size='sm'/>} </p>
+                <div>{label ? <span><b>{label}</b>: <Spinner animation="border" size='sm'/> </span> :
+                    <Spinner animation="border" size='sm'/>} </div>
             )
             }
         </div>
