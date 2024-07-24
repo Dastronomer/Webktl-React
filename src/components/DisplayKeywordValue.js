@@ -18,12 +18,11 @@ function DisplayKeywordValue({keyword, label}) {
 
 
     return (
-        <div style={{fontSize:10, margin:5}}>
+        <div style={{margin:2}}>
             {value !== null ? (
-                <div>{label ? <span><b>{label}</b>: {value} </span> : `${keyword}: ${value}`} </div>
+                <div>{ label ? <span><b>{label}</b>: {value} </span>: value } </div>
             ) : (
-                <div>{label ? <span><b>{label}</b>: <Spinner animation="border" size='sm'/> </span> :
-                    <Spinner animation="border" size='sm'/>} </div>
+                <div>{label ? <span><b>{label}</b>: <Spinner animation="border" size='sm'/> </span> : <Spinner animation="border" size='sm'/> } </div>
             )
             }
         </div>

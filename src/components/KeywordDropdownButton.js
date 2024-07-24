@@ -46,18 +46,26 @@ function KeywordDropdownButton({label, keyword, options, makeConfirm, optionsKey
 
             <label>
                 {label ? label : `${key}: ` }
-            <select
-                // style={{display:'block'}}
-                onChange={handleSelectChange}
-                id={`${keyword}-dropdown`}
-                value={selectedOption}
-            >
-                {optionsArray.map((value, index) => {
-                    return(
-                    <option key={index} value={value} >{value}</option>
-                    )
-                })}
-            </select>
+                <select
+                    // style={{display:'block'}}
+                    onChange={handleSelectChange}
+                    id={`${keyword}-dropdown`}
+                    value={selectedOption}
+                >
+                    {optionsArray.map((value, index) => {
+                            if (value === initialOption) {
+                                return (
+                                    <option key={index} value={value} selected>{value} </option>
+                                )
+                            } else {
+                                return (
+                                    <option key={index} value={value}>{value}</option>
+
+                                )
+                            }
+                        }
+                    )}
+                </select>
             </label>
 
         </div>

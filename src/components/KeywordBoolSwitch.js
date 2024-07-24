@@ -45,8 +45,6 @@ function KeywordBoolSwitch({keyword, label, makeConfirm}) {
                     style={{display:"inline"}}
                 />
             </FormLabel>
-
-
         </Form>
     );
 }
