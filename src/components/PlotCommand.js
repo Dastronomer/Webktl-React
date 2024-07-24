@@ -158,13 +158,15 @@ function PlotCommand(
                     </Col>
                 </Row>
             </Container>
-            <Plot
-                data={plotData}
-                layout={{
-                    title: title ?? 'Fancy Plot',
-                    autosize
-            }}
-            />
+            <div>
+                <Plot
+                    data={plotData}
+                    layout={{
+                        title: title ?? 'Fancy Plot',
+                        autosize
+                    }}
+                />
+            </div>
         </div>
     );
 }
