@@ -17,23 +17,6 @@ function KeywordValueTable({ keywordList, keywordLabelList, title, includeRemark
         setValues(newValues);
     }, [messages, keywordList]);
 
-    useEffect(() => {
-        const backgroundColors = {
-            'NOTICE': 'lemonchiffon',
-            'ERROR': 'pink',
-            'DISABLED': 'peachpuff',
-            'WARNING': 'plum',
-        };
-
-        messages.forEach(msg => {
-            const span = document.getElementById(msg.key);
-            if (span) {
-                span.innerText = msg.value;
-                span.style.backgroundColor = backgroundColors[msg.value] || 'transparent';
-            }
-        });
-    }, [messages]);
-
     const getHtmlLabel = (keyword) => {
         if(metadata[keyword]) {
             const parsedRemarks = JSON.parse(metadata[keyword].remarks);
@@ -71,11 +54,13 @@ function KeywordValueTable({ keywordList, keywordLabelList, title, includeRemark
                 ) : null}
                 <tbody>
                 {keywordList.map(((keyword, index) => (
-                    <tr key={keyword}>
-                        <td style={{width:'30%'}}> {keywordLabelList ? <b>{keywordLabelList[index]}</b> : keyword}</td>
+                    <tr key={`${keyword}-${index}`}>
+                        <td style={{width:'30%'}}>
+                            {keywordLabelList ? <b>{keywordLabelList[index]}</b> : keyword}
+                        </td>
                         {includeRemarks && <td>{getHtmlLabel(keyword)}</td>}
                         {values[keyword] !== null ?
-                            <td id={keyword}> {values[keyword]}{getUnits(keyword)}</td>
+                            <td> {values[keyword]}{getUnits(keyword)}</td>
                             :
                             <td style={{backgroundColor:'pink'}}>ERROR: KEYWORD NOT VALID or VALUE is null</td>}
                     </tr>
