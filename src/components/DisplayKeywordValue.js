@@ -15,12 +15,10 @@ function DisplayKeywordValue({keyword, label}) {
         })
     }, [messages, keyword])
 
-
-
     return (
         <div style={{margin:2}}>
             {value !== null ? (
-                <div>{ label ? <span><b>{label}</b>: {value} </span>: value } </div>
+                <div>{ label ? <div><b>{label}</b>: {value} </div>: value } </div>
             ) : (
                 <div>{label ? <span><b>{label}</b>: <Spinner animation="border" size='sm'/> </span> : <Spinner animation="border" size='sm'/> } </div>
             )

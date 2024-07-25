@@ -59,7 +59,7 @@ function KeywordForm({keyword, label, makeConfirm}) {
             <form>
                 <label id={`${keyword}-input`}> {label ? label : `${key}: ${initialInput} ` }
                     <input
-                        id={keyword}
+                        id={`${keyword}-form`}
                         type="text"
                         value={input}
                         onChange={handleInput}
