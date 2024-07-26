@@ -32,8 +32,10 @@ function PlotCommand(
         }));
     }
 
+
     useEffect(() => {
         setPlotData(handlePlotData(messages));
+        // eslint-disable-next-line
     }, [messages]);
 
     const generateOptions = (optionsArray, selectedValue) => {
@@ -88,19 +90,19 @@ function PlotCommand(
                                 <>
                                     <label>
                                         From:
-                                        <select onChange={(e) => onFromOption(e.target.value)} defaultValue={'12 hours ago'} >
+                                        <select id={'plot-from-date'} onChange={(e) => onFromOption(e.target.value)} defaultValue={'12 hours ago'} >
                                             {generateOptions(fromArray, '12 hours ago')}
                                         </select>
                                     </label>
                                     <label>
                                         To:
-                                        <select onChange={(e) => onToOption(e.target.value)} defaultValue={'now'}>
+                                        <select id={'plot-to-date'} onChange={(e) => onToOption(e.target.value)} defaultValue={'now'}>
                                             {generateOptions(toArray, 'now')}
                                         </select>
                                     </label>
                                     <label>
                                         Sampling Interval:
-                                        <select onChange={(e) => onIntervals(e.target.value)} defaultValue={'1min'}>
+                                        <select id={'plot-sampling-interval'} onChange={(e) => onIntervals(e.target.value)} defaultValue={'1min'}>
                                             {generateOptions(intervalArray, '1min')}
                                         </select>
                                     </label>

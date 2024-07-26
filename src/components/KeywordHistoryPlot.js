@@ -22,7 +22,7 @@ function KeywordHistoryPlot({url, serviceName, keywords, fromArray, toArray, int
         newCommand += `&-interval&${intervals}&-jsonrows`;
 
         setCommand(newCommand)
-    }, [fromOption, toOption, intervals, plotKeywords]);
+    }, [fromOption, toOption, intervals, plotKeywords, serviceName]);
 
     return (
         <WebSocketProvider2 url={url} command={command}>
