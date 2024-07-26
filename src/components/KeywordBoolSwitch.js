@@ -1,3 +1,7 @@
+// File KeywordBoolSwitch.js
+// Last Modified: July 26, 2024 by aNakashima
+// Description: Functional switches can be created with a valid keyword.
+
 import React, {useEffect, useState} from 'react';
 import {Form, FormLabel} from "react-bootstrap";
 import {useWebSocket1} from "../context/WebSocketProviders";

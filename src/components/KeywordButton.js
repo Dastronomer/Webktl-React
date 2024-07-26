@@ -1,7 +1,10 @@
+// File KeywordButton.js
+// Last Modified: July 26, 2024 by aNakashima
+// Description: Functional buttons can be created with a valid keyword.
+
 import React from 'react';
 import {Button} from "react-bootstrap";
 import {useWebSocket1} from "../context/WebSocketProviders";
-
 
 function KeywordButton({keyword, variant, label, buttonValue, makeConfirm}) {
 

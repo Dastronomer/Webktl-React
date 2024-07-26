@@ -1,7 +1,11 @@
+// File: Ticker.js
+// Last Modified: July 26, 2024 by aNakashima
+// Description: When given DISPCLK keyword, as long as the keyword does not remain
+// dormant for more than 5 seconds, ticker will continue to turn.
+
 import React, { useState, useEffect } from 'react';
 import {useWebSocket1} from "../context/WebSocketProviders";
 
-// Define the function to map values to ticker marks based on switch cases
 const getTickerMark = (value) => {
     switch (value) {
         case '\\':
@@ -16,7 +20,7 @@ const getTickerMark = (value) => {
 };
 
 const Ticker = ({ keyword }) => {
-    const [currentValue, setCurrentValue] = useState('/'); // Initialize with default value
+    const [currentValue, setCurrentValue] = useState('/');
     const {messages} = useWebSocket1();
     const [messageCount, setMessageCount] = useState(0);
 
@@ -25,12 +29,9 @@ const Ticker = ({ keyword }) => {
             if (msg.key === keyword) {
                 setMessageCount((prevCount) => {
                     const newCount = prevCount + 1;
-
-                    // Only update currentValue every 5 messages
                     if (newCount % 10 === 0) {
                         setCurrentValue(getTickerMark(currentValue));
                     }
-
                     return newCount;
                 });
             }

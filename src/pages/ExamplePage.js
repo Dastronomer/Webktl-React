@@ -153,7 +153,7 @@ function ExamplePage(props) {
                     <DataContainerCarousel header="CAROUSEL" contents={carouselContents}/>
                 }
             />
-            <KeywordHistoryPlot url='ws://scaleserver:8080/gshowd' serviceName='scagilent' keywords="K_BENCH_LR K_COLDHEAD K_CU_BLOCK K_GETTER K_L_BRACKET K_LDT_MOT
+            <KeywordHistoryPlot url='wss://scaleserver.ucolick.org:8081/gshowd' serviceName='scagilent' keywords="K_BENCH_LR K_COLDHEAD K_CU_BLOCK K_GETTER K_L_BRACKET K_LDT_MOT
             K_LL_FRAME K_LWH_MOT K_RADSHIELD K_RIGHTFILTSET K_UL_FRAME" title='Lesker Box Temperatures'/>
 
         </div>

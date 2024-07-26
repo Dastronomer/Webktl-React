@@ -1,3 +1,8 @@
+// File KeywordBoolCheckbox.js
+// Last Modified: July 26, 2024 by aNakashima
+// Description: Functional true or false checkbox can be created with a valid keyword.
+
+
 import React, {useEffect, useState} from 'react';
 import {useWebSocket1} from "../context/WebSocketProviders";
 

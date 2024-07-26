@@ -1,3 +1,7 @@
+// File PlotCommand.js
+// Last Modified: July 26, 2024 by aNakashima
+// Description: Works with KeywordHistoryPlot to create the plot graph in app.
+
 import React, {useEffect, useState} from 'react';
 import Plot from "react-plotly.js";
 import {useWebSocket2} from "../context/WebSocketProviders";

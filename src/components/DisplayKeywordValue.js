@@ -1,3 +1,8 @@
+// File DisplayKeywordValue.js
+// Last Modified: July 26, 2024 by aNakashima
+// Description: Given any valid keyword, the corresponding value is displayed in real-time.
+// Label can be adjusted as needed, or left off for no additional text displayed.
+
 import React, {useEffect, useState} from 'react';
 import {useWebSocket1} from "../context/WebSocketProviders";
 import {Spinner} from "react-bootstrap";

@@ -1,3 +1,7 @@
+// File KeywordDropdownButton.js
+// Last Modified: July 26, 2024 by aNakashima
+// Description: Functional dropdown button on keyword with adjustable label, and options.
+
 import React, {useEffect, useState} from 'react';
 import {useWebSocket1} from "../context/WebSocketProviders";
 

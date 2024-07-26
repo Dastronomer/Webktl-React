@@ -1,3 +1,7 @@
+// File KeywordCheckbox.js
+// Last Modified: July 26, 2024 by aNakashima
+// Description: Functional checkboxes can be created with a valid keyword. Sends modify request.
+
 import React, {useState} from 'react';
 import {useWebSocket1} from "../context/WebSocketProviders";
 

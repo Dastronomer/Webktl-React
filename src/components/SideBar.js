@@ -1,3 +1,7 @@
+// File: SideBar.js
+// Last Modfied: July 26, 2024 by aNakashima
+// Description: Functional side navigation bar. Need to adjust routes in App.js to match NavLinks
+
 import React from 'react';
 import './SideBar.css';
 
@@ -10,9 +14,7 @@ import {
 } from 'cdbreact';
 import { NavLink } from 'react-router-dom';
 
-
 function SideBar({instrumentName }) {
-
 
     return (
         <div style={{display: 'flex', overflow: 'scroll initial', height:"100vh"}}>
@@ -45,5 +47,3 @@ function SideBar({instrumentName }) {
 }
 
 export default SideBar;
-
-

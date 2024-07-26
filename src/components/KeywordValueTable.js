@@ -1,3 +1,8 @@
+// File KeywordValueTable.js
+// Last Modified: July 26, 2024 by aNakashima
+// Description: Given a list of keyword strings, this component will build a simple
+// time of keywords and values.
+
 import React, {useEffect, useState} from 'react';
 import {Spinner, Table} from "react-bootstrap";
 import {useWebSocket1} from "../context/WebSocketProviders";

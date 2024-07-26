@@ -1,3 +1,9 @@
+// File KeywordHistoryPlot.js
+// Last Modified: July 26, 2024 by aNakashima
+// Description: Given a WebSocket URL, service name, and keywords, this component
+// generates a line graph displaying the values of the specified keywords over time
+// using open source library Plotly. Provides the url connection to PlotCommand.js
+
 import React, { useEffect, useState} from 'react';
 import {handlePlotKeywords, WebSocketProvider2} from "../context/WebSocketProviders";
 import PlotCommand from "./PlotCommand";

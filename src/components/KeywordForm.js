@@ -1,3 +1,7 @@
+// File KeywordForm.js
+// Last Modified: July 26, 2024 by aNakashima
+// Description: Functional input forms can be created with a valid keyword.
+
 import React, {useCallback, useEffect} from 'react';
 import {useState} from "react";
 import {useWebSocket1} from "../context/WebSocketProviders";

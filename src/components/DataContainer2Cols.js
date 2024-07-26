@@ -1,3 +1,9 @@
+// File DataContainer2Cols.js
+// Last Modified: July 26, 2024 by aNakashima
+// Description: Enables the user to create nicely formatted web pages using React
+// Bootstrap’s grid system. By passing in contents which might contain the essential
+// components, user’s can mix and match to create a versatile site.
+
 import React from 'react';
 import {Col , Row} from "react-bootstrap";
 
