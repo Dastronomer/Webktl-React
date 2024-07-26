@@ -19,12 +19,13 @@ const createWebSocketContext = (messageHandler, plotUpdate) => {
             const wsClient = new WebSocket(url);
 
             wsClient.onopen = () => {
-                try{
-                    if(command){
+                console.log(`Connected to WebSocket server at ${url}`);
+                try {
+                    if (command) {
                         wsClient.send(command);
                     }
-                } catch (e){
-                    console.error(`error: `, e)
+                } catch (e) {
+                    console.error(`Error sending command: `, e);
                 }
             };
 
@@ -36,18 +37,20 @@ const createWebSocketContext = (messageHandler, plotUpdate) => {
                 }
             };
 
-            wsClient.onclose = () => {
-                console.log(`Disconnected from WebSocket server at ${url}`);
+            wsClient.onclose = (event) => {
+                console.log(`WebSocket connection closed at ${url}. Code: ${event.code}, Reason: ${event.reason}`);
             };
 
-            wsClient.onerror = (e) => {
-                console.error(`WebSocket error at ${url}: ${e}`);
+            wsClient.onerror = (error) => {
+                console.error(`WebSocket error at ${url}: `, error);
             };
 
             setWs(wsClient);
 
             return () => {
-                wsClient.close();
+                if (wsClient.readyState === WebSocket.OPEN) {
+                    wsClient.close();
+                }
             };
         }, [command, url]);
 
