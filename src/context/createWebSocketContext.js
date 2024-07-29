@@ -6,6 +6,7 @@ const createWebSocketContext = (messageHandler, plotUpdate) => {
     const WebSocketProvider = ({url, children, command}) => {
         const [messages, setMessages] = useState([]);
         const [ws, setWs] = useState(null);
+        // eslint-disable-next-line
         const [reqIdCounter, setReqIdCounter] = useState(0);
         const [metadata, setMetadata] = useState({});
 
