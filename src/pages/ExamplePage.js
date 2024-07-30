@@ -155,6 +155,7 @@ function ExamplePage(props) {
             />
             <KeywordHistoryPlot url='wss://scaleserver.ucolick.org:8081/gshowd' serviceName='scagilent' keywords="K_BENCH_LR K_COLDHEAD K_CU_BLOCK K_GETTER K_L_BRACKET K_LDT_MOT
             K_LL_FRAME K_LWH_MOT K_RADSHIELD K_RIGHTFILTSET K_UL_FRAME" title='Lesker Box Temperatures'/>
+            <KeywordHistoryPlot url='wss://scaleserver.ucolick.org:8081/gshowd' serviceName='scagilent' keywords="K_BENCH_LR K_COLDHEAD" title='Lesker Box Temperatures' mode='markers' fromArray={['10 mins ago', '5 mins ago', '3 mins ago', '1 mins ago']} toArray={['now']} intervalArray={['1min', '30sec', '1sec'] }/>
 
         </div>
     );

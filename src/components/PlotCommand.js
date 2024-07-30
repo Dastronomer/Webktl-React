@@ -14,7 +14,7 @@ function PlotCommand(
         fromArray= ['4 days ago', '3 days ago', '2 days ago', '24 hours ago', '12 hours ago', '8 hours ago', '4 hours ago', '2 hours ago'],
         toArray = ['4 days ago', '3 days ago', '2 days ago', '24 hours ago', '12 hours ago', '8 hours ago', '4 hours ago', '2 hours ago', 'now'],
         intervalArray = ['1h', '30min', '10min', '1min', '20s', '10s'],
-        title
+        title, mode
     }) {
 
     const [useDropdown, setUseDropdown] = useState(true);
@@ -30,7 +30,7 @@ function PlotCommand(
             x: message.x,
             y: message.y,
             type: 'scatter',
-            mode: 'lines',
+            mode: mode ?? 'lines',
             name: message.keyword,
             marker: { color: colors[index % colors.length]},
         }));

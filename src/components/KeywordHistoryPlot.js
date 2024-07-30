@@ -8,12 +8,12 @@ import React, { useEffect, useState} from 'react';
 import {handlePlotKeywords, WebSocketProvider2} from "../context/WebSocketProviders";
 import PlotCommand from "./PlotCommand";
 
-function KeywordHistoryPlot({url, serviceName, keywords, fromArray, toArray, intervalArray, title}) {
+function KeywordHistoryPlot({url, serviceName, keywords, fromArray, toArray, intervalArray, title, mode}) {
 
     const plotKeywords = keywords;
-    const [fromOption, setFromOption] = useState("12 hours ago");
-    const [toOption, setToOption] = useState("now");
-    const [intervals, setIntervals] = useState("1min");
+    const [fromOption, setFromOption] = useState(fromArray && fromArray.length > 0 ? fromArray[0] : "12 hours ago");
+    const [toOption, setToOption] = useState(toArray && toArray.length > 0 ? toArray[0] : "now");
+    const [intervals, setIntervals] = useState(intervalArray && intervalArray.length > 0 ? intervalArray[0] : "1min");
     const [command, setCommand] = useState('');
 
     useEffect(() => {
@@ -32,7 +32,15 @@ function KeywordHistoryPlot({url, serviceName, keywords, fromArray, toArray, int
 
     return (
         <WebSocketProvider2 url={url} command={command}>
-            <PlotCommand onFromOption={setFromOption} onToOption={setToOption} onIntervals={setIntervals} fromArray={fromArray} toArray={toArray} intervalArray={intervalArray} title={title}/>
+            <PlotCommand
+                onFromOption={setFromOption}
+                onToOption={setToOption}
+                onIntervals={setIntervals}
+                fromArray={fromArray}
+                toArray={toArray}
+                intervalArray={intervalArray}
+                title={title}
+                mode={mode}/>
         </WebSocketProvider2>
     );
 }
