@@ -1,20 +1,26 @@
 // File PlotCommand.js
-// Last Modified: July 26, 2024 by aNakashima
+// Last Modified: July 30, 2024 by aNakashima
 // Description: Works with KeywordHistoryPlot to create the plot graph in app.
 
 import React, {useEffect, useState} from 'react';
 import Plot from "react-plotly.js";
 import {useWebSocket2} from "../context/WebSocketProviders";
 import {Col, Container, Form, FormLabel, Row} from "react-bootstrap";
-import {autosize} from "plotly.js/src/plots/layout_attributes";
+import autosize from "plotly.js/src/plots/layout_attributes";
+
 
 function PlotCommand(
     {
-        onFromOption, onToOption, onIntervals,
+        initalFrom,
+        initalTo,
+        initialInterval,
+        onFromOption,
+        onToOption,
+        onIntervals,
         fromArray= ['4 days ago', '3 days ago', '2 days ago', '24 hours ago', '12 hours ago', '8 hours ago', '4 hours ago', '2 hours ago'],
         toArray = ['4 days ago', '3 days ago', '2 days ago', '24 hours ago', '12 hours ago', '8 hours ago', '4 hours ago', '2 hours ago', 'now'],
         intervalArray = ['1h', '30min', '10min', '1min', '20s', '10s'],
-        title, mode
+        title, mode, xKey, yKey
     }) {
 
     const [useDropdown, setUseDropdown] = useState(true);
@@ -22,27 +28,39 @@ function PlotCommand(
     const [to, setTo] = useState('');
     const [interval, setInterval] = useState('');
     const [plotData, setPlotData] = useState([]);
+    const [xValues, setXValues] = useState([]);
+    const [yValues, setYValues] = useState([]);
 
     const {messages} = useWebSocket2();
-    const handlePlotData = () => {
-        const colors = ['red', 'blue', 'green', 'goldenrod', 'teal', 'orange', 'pink', 'brown', 'purple', 'grey', 'cyan', 'violet'];
-        return messages.map((message, index) => ({
-            x: message.x,
-            y: message.y,
-            type: 'scatter',
-            mode: mode ?? 'lines',
-            name: message.keyword,
-            marker: { color: colors[index % colors.length]},
-        }));
-    }
-
 
     useEffect(() => {
-        setPlotData(handlePlotData(messages));
-        // eslint-disable-next-line
-    }, [messages]);
+        if (xKey && yKey) {
+            messages.forEach(msg => {
+                if (msg.keyword === xKey) {
+                    setXValues(msg.y);
+                } else if (msg.keyword === yKey) {
+                    setYValues(msg.y);
+                } else if (msg.time) {
+                    setXValues(prevXValues => [...prevXValues, msg.values[0]]);
+                    setYValues(prevYValues => [...prevYValues, msg.values[1]]);
+                }
+            });
+        }else{
+            const colors = ['red', 'blue', 'green', 'goldenrod', 'teal', 'orange', 'pink', 'brown', 'purple', 'grey', 'cyan', 'violet'];
+            const newPlotData = messages.map((message, index) => ({
+                x: message.x,
+                y: message.y,
+                type: 'scatter',
+                mode: mode ?? 'lines',
+                name: message.keyword,
+                marker: { color: colors[index % colors.length] },
+            }));
+            setPlotData(newPlotData);
+        }
+    }, [messages, mode, xKey, yKey]);
 
-    const generateOptions = (optionsArray, selectedValue) => {
+
+    const generateOptions = (optionsArray) => {
         return optionsArray.map((option, index) => (
             <option key={index} value={option}>
                 {option}
@@ -94,20 +112,20 @@ function PlotCommand(
                                 <>
                                     <label>
                                         From:
-                                        <select id={'plot-from-date'} onChange={(e) => onFromOption(e.target.value)} defaultValue={'12 hours ago'} >
-                                            {generateOptions(fromArray, '12 hours ago')}
+                                        <select id={'plot-from-date'} onChange={(e) => onFromOption(e.target.value)} defaultValue={initalFrom} >
+                                            {generateOptions(fromArray, fromArray[0])}
                                         </select>
                                     </label>
                                     <label>
                                         To:
-                                        <select id={'plot-to-date'} onChange={(e) => onToOption(e.target.value)} defaultValue={'now'}>
-                                            {generateOptions(toArray, 'now')}
+                                        <select id={'plot-to-date'} onChange={(e) => onToOption(e.target.value)} defaultValue={initalTo}>
+                                            {generateOptions(toArray, toArray[0])}
                                         </select>
                                     </label>
                                     <label>
                                         Sampling Interval:
-                                        <select id={'plot-sampling-interval'} onChange={(e) => onIntervals(e.target.value)} defaultValue={'1min'}>
-                                            {generateOptions(intervalArray, '1min')}
+                                        <select id={'plot-sampling-interval'} onChange={(e) => onIntervals(e.target.value)} defaultValue={initialInterval}>
+                                            {generateOptions(intervalArray, intervalArray[0])}
                                         </select>
                                     </label>
                                 </>
@@ -140,7 +158,7 @@ function PlotCommand(
                                             value={interval}
                                             onChange={handleChangeInterval}
                                             onKeyDown={handleKeyDownInterval}
-                                            placeholder="1min"
+                                            placeholder="1h"
                                         />
                                     </label>
                                 </>
@@ -164,13 +182,35 @@ function PlotCommand(
                     </Col>
                 </Row>
             </Container>
-            <Plot
-                data={plotData}
-                layout={{
-                    title: title ?? 'Fancy Plot',
-                    autosize
-                }}
-            />
+            {xKey && yKey ? (
+                <Plot
+                    data={[
+                        {
+                            x: xValues,
+                            y: yValues,
+                            type: 'scatter',
+                            mode: 'markers',
+                            marker: { color: 'red' },
+                        },
+                    ]}
+                    layout={{
+                        title: title ?? 'Fancy Plot',
+                        xaxis: { title: xKey },
+                        yaxis: { title: yKey },
+                        autosize,
+                    }}
+                />
+            ) : (
+                <Plot
+                    data={plotData}
+                    layout={{
+                        title: title ?? 'Fancy Plot',
+                        xaxis: { title: 'Time' },
+                        yaxis: { title: 'Value' },
+                        autosize,
+                    }}
+                />
+            )}
         </div>
     );
 }
