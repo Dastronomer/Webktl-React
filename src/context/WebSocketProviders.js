@@ -1,6 +1,12 @@
+// File: WebSocketProviders.js
+// Last Modified: August 1, 2024 by aNakashima
+// Description: defines two custom handlers for different WebSocket contexts.
+// Handlers determine how message from WebSocket are filtered and used by children
+// components. Exports the created WebSocket Providers and hooks.
+
 import createWebSocketContext from './createWebSocketContext';
 
-// Custom handler for WebSocket at URL 1
+// Custom handler for WebSocket at URL type gather messages and metadata
 const handleMessageSocket1 = (message, setMessages, setMetadata) => {
     let parsedMessage;
     try {
@@ -57,7 +63,7 @@ const handleMessageSocket1 = (message, setMessages, setMetadata) => {
 };
 
 
-// Custom handler for WebSocket at URL 2
+// Custom handler for WebSocket at URL type gather data for history plot
 const handleMessageSocket2 = (message, setMessages, setMetadata) => {
     let newStr;
     let newData = [];
@@ -136,7 +142,6 @@ const handleMessageSocket2 = (message, setMessages, setMetadata) => {
            }else if(parsedMessage.history){
                 gatherPlotData(parsedMessage.history)
            }else if(parsedMessage.time){
-                // console.log(parsedMessage);
                 setMessages(prevMessages => [...prevMessages, parsedMessage]);
             }
             else{
@@ -150,7 +155,6 @@ const handleMessageSocket2 = (message, setMessages, setMetadata) => {
 const handlePlotKeywords = (plotKeywords) => {
     return plotKeywords.replace(/\s+/g, '&');
 }
-
 
 // Create specific WebSocket providers
 const { WebSocketProvider: WebSocketProvider1, useWebSocket: useWebSocket1 } = createWebSocketContext(handleMessageSocket1);

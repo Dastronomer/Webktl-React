@@ -1,6 +1,12 @@
+// File: createWebSocketContext.js
+// Last Modified: July 31, 2024 by aNakashima
+// Description: Establishes handshake with WebSocket server. WebSocket handshake enables
+// dual communication between server and client, ultimately enabling messages to be
+// received and requests to be sent
+
 import React, {createContext, useCallback, useContext, useEffect, useState} from 'react';
 
-const createWebSocketContext = (messageHandler, plotUpdate) => {
+const createWebSocketContext = (messageHandler) => {
     const WebSocketContext = createContext(null);
 
     const WebSocketProvider = ({url, children, command}) => {

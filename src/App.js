@@ -23,7 +23,7 @@ function App() {
             <WebSocketProvider1 url={url} command={modifiedCommand}>
                 <BrowserRouter>
                     <SideBar instrumentName={instrumentName}/>
-                    <div className='App flex-grow-1' style={{overflow:'auto', height:'100vh'}}>
+                    <div className='App'>
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/examplepage" element={<ExamplePage/>} />
