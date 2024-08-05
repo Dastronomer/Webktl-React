@@ -42,7 +42,7 @@ function KeywordHistoryPlot({url, serviceName, keywords, fromArray, toArray, int
                 onFromOption={setFromOption}
                 onToOption={setToOption}
                 onIntervals={setIntervals}
-                /// Determined by User ///
+                // --- Determined by User --- //
                 fromArray={fromArray}
                 toArray={toArray}
                 intervalArray={intervalArray}
