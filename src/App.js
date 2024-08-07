@@ -9,9 +9,9 @@ import {WebSocketProvider1} from "./context/WebSocketProviders";
 function App() {
 
 ////////////////////////////////////////////////////////////////
-    const url = 'wss://scaleserver.ucolick.org:8081/gshowd';        //
-    const serviceName = "pie"                          //
-    const instrumentName = "INSTRUMENT NAME"           //
+    const url = 'wss://scaleserver.ucolick.org:8081/gshowd';
+    const serviceName = "pie"
+    const instrumentName = "INSTRUMENT NAME"
 ////////////////////////////////////////////////////////////////
 
 

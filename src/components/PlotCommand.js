@@ -20,7 +20,7 @@ function PlotCommand(
         fromArray= ['4 days ago', '3 days ago', '2 days ago', '24 hours ago', '12 hours ago', '8 hours ago', '4 hours ago', '2 hours ago'],
         toArray = ['4 days ago', '3 days ago', '2 days ago', '24 hours ago', '12 hours ago', '8 hours ago', '4 hours ago', '2 hours ago', 'now'],
         intervalArray = ['1h', '30min', '10min', '1min', '20s', '10s'],
-        title, mode, xKey, yKey
+        title, mode, xKey, yKeys
     }) {
 
     const [useDropdown, setUseDropdown] = useState(true);
@@ -30,23 +30,39 @@ function PlotCommand(
     const [plotData, setPlotData] = useState([]);
     const [xValues, setXValues] = useState([]);
     const [yValues, setYValues] = useState([]);
+    const colors = ['red', 'blue', 'green', 'goldenrod', 'teal', 'orange', 'pink', 'brown', 'purple', 'grey', 'cyan', 'violet'];
+
 
     const {messages} = useWebSocket2();
 
     useEffect(() => {
-        if (xKey && yKey) {
+        if (xKey) {
+            let newXValues = [];
+            let newYValues = {};
+            yKeys.forEach(yKey => newYValues[yKey] = []);
+
             messages.forEach(msg => {
                 if (msg.keyword === xKey) {
-                    setXValues(msg.y);
-                } else if (msg.keyword === yKey) {
-                    setYValues(msg.y);
-                } else if (msg.time) {
-                    setXValues(prevXValues => [...prevXValues, msg.values[0]]);
-                    setYValues(prevYValues => [...prevYValues, msg.values[1]]);
+                    newXValues = msg.y;
+                } else if (yKeys.includes(msg.keyword)) {
+                    newYValues[msg.keyword] = msg.y;
                 }
             });
+
+            setXValues(newXValues);
+            setYValues(newYValues);
+
+            const newPlotData = yKeys.map((yKey, index) => ({
+                x: newXValues,
+                y: newYValues[yKey],
+                type: 'scatter',
+                mode: 'markers',
+                name: yKey,
+                marker: {  color: colors[index % colors.length] }, // Replace with desired colors
+            }));
+
+            setPlotData(newPlotData);
         }else{
-            const colors = ['red', 'blue', 'green', 'goldenrod', 'teal', 'orange', 'pink', 'brown', 'purple', 'grey', 'cyan', 'violet'];
             const newPlotData = messages.map((message, index) => ({
                 x: message.x,
                 y: message.y,
@@ -57,7 +73,7 @@ function PlotCommand(
             }));
             setPlotData(newPlotData);
         }
-    }, [messages, mode, xKey, yKey]);
+    }, [messages, mode, xKey, yKeys]);
 
 
     const generateOptions = (optionsArray) => {
@@ -182,21 +198,13 @@ function PlotCommand(
                     </Col>
                 </Row>
             </Container>
-            {xKey && yKey ? (
+            {xKey && yKeys.length > 0 ? (
                 <Plot
-                    data={[
-                        {
-                            x: xValues,
-                            y: yValues,
-                            type: 'scatter',
-                            mode: 'markers',
-                            marker: { color: 'red' },
-                        },
-                    ]}
+                    data={plotData}
                     layout={{
                         title: title ?? 'Fancy Plot',
                         xaxis: { title: xKey },
-                        yaxis: { title: yKey },
+                        yaxis: {title: 'Values' },
                         autosize,
                     }}
                 />

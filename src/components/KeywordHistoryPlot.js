@@ -9,7 +9,7 @@ import React, { useEffect, useState} from 'react';
 import {handlePlotKeywords, WebSocketProvider2} from "../context/WebSocketProviders";
 import PlotCommand from "./PlotCommand";
 
-function KeywordHistoryPlot({url, serviceName, keywords, fromArray, toArray, intervalArray, title, mode, xKey, yKey}) {
+function KeywordHistoryPlot({url, serviceName, keywords, fromArray, toArray, intervalArray, title, mode, xKey, yKeys}) {
 
     const plotKeywords = keywords;
     const [fromOption, setFromOption] = useState(fromArray && fromArray.length > 0 ? fromArray[0] : "12 hours ago");
@@ -22,7 +22,7 @@ function KeywordHistoryPlot({url, serviceName, keywords, fromArray, toArray, int
         if(plotKeywords){
             newCommand += `&${handlePlotKeywords(plotKeywords)}&-date&${fromOption}`;
         }else{
-            newCommand += `&${xKey}&${yKey}&-date&${fromOption}`
+            newCommand += `&${xKey}&${yKeys.join('&')}&-date&${fromOption}`
         }
         if (toOption !== 'now') {
             newCommand += `&-date&${toOption}`;
@@ -31,7 +31,7 @@ function KeywordHistoryPlot({url, serviceName, keywords, fromArray, toArray, int
         }
         newCommand += `&-interval&${intervals}&-jsonrows`;
         setCommand(newCommand)
-    }, [fromOption, toOption, intervals, plotKeywords, serviceName, xKey, yKey]);
+    }, [fromOption, toOption, intervals, plotKeywords, serviceName, xKey, yKeys]);
 
     return (
         <WebSocketProvider2 url={url} command={command}>
@@ -49,7 +49,7 @@ function KeywordHistoryPlot({url, serviceName, keywords, fromArray, toArray, int
                 title={title}
                 mode={mode}
                 xKey={xKey}
-                yKey={yKey}
+                yKeys={yKeys}
             />
         </WebSocketProvider2>
     );
